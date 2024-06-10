@@ -1,6 +1,6 @@
 # Text Summarization API
 
-This project provides an API for summarizing text using Django and an external summarization service.
+This project provides an API for interpreting and executing code generated from a prompt on given Content.
 
 ## Prerequisites
 
@@ -33,8 +33,8 @@ This project provides an API for summarizing text using Django and an external s
 3. **Clone the Project:**
 
     ```bash
-    git clone https://github.com/ankitsharma97/text_sum.git
-    cd text_sum
+    git clone https://github.com/ankitsharma97/code_interpreter.git
+    cd code_interpreter
     ```
 
 4. **Install Dependencies:**
@@ -43,84 +43,27 @@ This project provides an API for summarizing text using Django and an external s
     pip install -r requirements.txt
     ```
 
-5. **Run the Server:**
+5. **Include API_KEY:**
+    ```bash
+      export API_KEY=your_gemini_api_key_here 
+    ```
+6. **Run the Server:**
 
     ```bash
     python manage.py runserver
     ```
 
-## API Endpoints
+## Testing the API Endpoint
 
-- `POST /api/register/` - Register a new user
-- `POST /api/login/` - Log in a user
-- `POST /api/logout/` - Log out a user
-- `GET /api/user/<int:pk>/` - Retrieve details of a specific user
-- `GET /api/users/` - Find users
-- `POST /api/summarize/` - Summarize text
+You can test the `/api/code_interpreter/` endpoint using tools like Postman.
 
-## Testing the API
+### Using Postman
 
-Use Postman to test the API endpoints.
+1. Open Postman and create a new POST request.
+2. Set the request URL to `http://localhost:8000/api/code_interpreter/`.
+3. Add two form-data parameters:
+   - Key: `file`, Value: Select File and choose your file.
+   - Key: `prompt`, Value: Your prompt here.
+4. Click Send to make the request.
 
-### 1. Register a New User
-
-- **Method:** POST
-- **URL:** `http://127.0.0.1:8000/api/register/`
-- **Headers:**
-  - `Content-Type: application/json`
-- **Body:**
-    ```json
-    {
-      "username": "yourusername",
-      "password": "yourpassword",
-      "email": "youremail@example.com"
-    }
-    ```
-
-### 2. Log in a User
-
-- **Method:** POST
-- **URL:** `http://127.0.0.1:8000/api/login/`
-- **Headers:**
-  - `Content-Type: application/json`
-- **Body:**
-    ```json
-    {
-      "username": "yourusername",
-      "password": "yourpassword"
-    }
-    ```
-
-### 3. Log out a User
-
-- **Method:** POST
-- **URL:** `http://127.0.0.1:8000/api/logout/`
-- **Headers:**
-  - `Authorization: Token your-auth-token`
-
-### 4. Retrieve User Details
-
-- **Method:** GET
-- **URL:** `http://127.0.0.1:8000/api/user/<int:pk>/`
-- **Headers:**
-  - `Authorization: Token your-auth-token`
-
-### 5. Find Users
-
-- **Method:** GET
-- **URL:** `http://127.0.0.1:8000/api/users/`
-- **Headers:**
-  - `Authorization: Token your-auth-token`
-
-### 6. Summarize Text
-
-- **Method:** POST
-- **URL:** `http://127.0.0.1:8000/api/summarize/`
-- **Headers:**
-  - `Content-Type: application/json`
-- **Body:**
-    ```json
-    {
-      "text": "Your text to summarize goes here."
-    }
-    ```
+You should receive a response containing the result of the code execution and the generated Python code.
